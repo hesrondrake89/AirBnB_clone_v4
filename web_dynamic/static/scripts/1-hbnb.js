@@ -1,8 +1,5 @@
 $( document ).ready(function () {
 
-    /*****************************************************
-      display list of checkboxes clicked
-     *****************************************************/
     let ls_amen = [];
     $('input[type=checkbox]').change (function () {
       let name = $(this).attr('data-name');
