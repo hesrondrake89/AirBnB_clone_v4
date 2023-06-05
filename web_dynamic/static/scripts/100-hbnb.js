@@ -1,7 +1,7 @@
 $(document).ready(function () {
   console.log('#### SCRIPT LOADED ####');
   const amenDict = {};
-  //* detects if amenities checkbox is changed
+  
   $('.amenities input[type="checkbox"]').on('change', function () {
     if (this.checked) {
       console.log('#### Amenity checked! ####');
@@ -13,18 +13,18 @@ $(document).ready(function () {
     } else {
       console.log('#### Amenity UNchecked! ####');
 
-      // remove key/value from dict if id is a duplicate
+     
       delete amenDict[$(this).attr('data-id')];
       delete amenDict[$(this).attr('data-name')];
     }
 
-    // appends dict values as stringified list to html
+    
     $('.amenities').find('h4').text('');
     $('.amenities').find('h4').text(Object.values(amenDict).join(', '));
   });
 
   const cityDict = {};
-  //* detects if cities checkbox is changed
+
   $('.locations ul.popover > ul input[type="checkbox"]').on('change', function () {
     if (this.checked) {
       console.log('#### City checked! ####');
@@ -36,17 +36,17 @@ $(document).ready(function () {
     } else {
       console.log('#### City UNchecked! ####');
 
-      // remove key/value from dict if id is a duplicate
+    
       delete cityDict[$(this).attr('data-id')];
       delete cityDict[$(this).attr('data-name')];
     }
-    // appends dict values as stringified list to html
+   
     $('.locations').find('h4').text('');
     $('.locations').find('h4').text(Object.values(cityDict).join(', '));
   });
 
   const stateDict = {};
-  //* detects if states checkbox is changed
+ 
   $('.locations ul.popover > li input[type="checkbox"]').on('change', function () {
     if (this.checked) {
       console.log('#### State checked! ####');
@@ -58,7 +58,7 @@ $(document).ready(function () {
     } else {
       console.log('#### State UNchecked! ####');
 
-      // remove key/value from dict if id is a duplicate
+      
       delete stateDict[$(this).attr('data-id')];
       delete stateDict[$(this).attr('data-name')];
     }
@@ -68,7 +68,7 @@ $(document).ready(function () {
     ####################################################
   */
 
-  // requests api's status on port :5001, updates html
+  
   $.getJSON('http://0.0.0.0:5001/api/v1/status/', function (data) {
     console.log('#### API Status ####');
     if (data.status === 'OK') {
@@ -84,18 +84,12 @@ $(document).ready(function () {
     ####################################################
   */
 
-  /* POST request to api/v1/places_search/ endpoint
-     initializes only when search button selected
-  */
+  
   function searchButton () {
     $('button').click(function () {
       console.log('button clicked');
 
-      /* object passed in to ajax must be plain object
- and then stringified inside the settings;
- async set to false so query resolves prior to
- appending new HTML
-*/
+      
       const ajaxDict = {};
       if (Object.keys(amenDict).length > 0 ||
 Object.keys(cityDict).length > 0 ||
@@ -125,14 +119,14 @@ Object.keys(stateDict).length > 0) {
         }
       });
 
-      // appending data from POST query to html page
+      
       posting.done(function (data) {
         console.log('#### Peeling JSON onion ####');
 
-        // page element where html will be appended
+       
         const el = $('section.places');
 
-        // empty it to start fresh every time
+       
         el.empty();
 
         el.append('<h1>Places</h1>');
@@ -206,14 +200,14 @@ Object.keys(stateDict).length > 0) {
       }
     });
 
-    // appending data from POST query to html page
+   
     posting.done(function (data) {
       console.log('#### Peeling JSON onion ####');
 
-      // page element where html will be appended
+      
       const el = $('section.places');
 
-      // empty it to start fresh every time
+      
       el.empty();
 
       el.append('<h1>Places</h1>');
